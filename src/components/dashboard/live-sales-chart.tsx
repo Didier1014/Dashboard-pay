@@ -54,8 +54,8 @@ export function LiveSalesChart() {
       .on(
         "postgres_changes",
         { event: "INSERT", schema: "public", table: "transactions" },
-        (payload) => {
-          const newTx = payload.new as { created_at: string; amount: number }
+        (payload: { new: { created_at: string; amount: number } }) => {
+          const newTx = payload.new
           setData((prev) => {
             const lastPoint = prev[prev.length - 1]
             if (lastPoint) {

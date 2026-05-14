@@ -92,10 +92,9 @@ export function useRealtimeTransactions(
           schema: "public",
           table: "transactions",
         },
-        (payload) => {
+        (payload: { eventType: string; new: Transaction; old: { id: string } }) => {
           if (payload.eventType === "INSERT") {
-            const newTx = payload.new as Transaction
-            setTransactions((prev) => [newTx, ...prev])
+            setTransactions((prev) => [payload.new, ...prev])
           } else if (payload.eventType === "UPDATE") {
             const updatedTx = payload.new as Transaction
             setTransactions((prev) =>

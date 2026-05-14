@@ -38,12 +38,12 @@ export default function DashboardHome() {
         .gte("created_at", yesterdayStr)
         .lt("created_at", todayStr)
 
-      const todayCompleted = todaySales?.filter((t) => t.status === "completed") || []
-      const yesterdayCompleted = yesterdaySales?.filter((t) => t.status === "completed") || []
-      const todayFailed = todaySales?.filter((t) => t.status === "failed") || []
+      const todayCompleted = todaySales?.filter((t: { amount: number; status: string }) => t.status === "completed") || []
+      const yesterdayCompleted = yesterdaySales?.filter((t: { amount: number; status: string }) => t.status === "completed") || []
+      const todayFailed = todaySales?.filter((t: { amount: number; status: string }) => t.status === "failed") || []
 
-      const revenueToday = todayCompleted.reduce((acc, t) => acc + (t.amount || 0), 0)
-      const revenueYesterday = yesterdayCompleted.reduce((acc, t) => acc + (t.amount || 0), 0)
+      const revenueToday = todayCompleted.reduce((acc: number, t: { amount: number }) => acc + (t.amount || 0), 0)
+      const revenueYesterday = yesterdayCompleted.reduce((acc: number, t: { amount: number }) => acc + (t.amount || 0), 0)
       const countToday = todayCompleted.length
       const countYesterday = yesterdayCompleted.length
       const averageTicket = countToday > 0 ? revenueToday / countToday : 0

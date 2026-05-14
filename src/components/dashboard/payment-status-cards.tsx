@@ -41,8 +41,8 @@ export function PaymentStatusCards() {
 
       const succeededCount = succeeded?.length || 0
       const failedCount = failed?.length || 0
-      const succeededAmount = succeeded?.reduce((acc, t) => acc + (t.amount || 0), 0) || 0
-      const failedAmount = failed?.reduce((acc, t) => acc + (t.amount || 0), 0) || 0
+      const succeededAmount = succeeded?.reduce((acc: number, t: { amount: number }) => acc + (t.amount || 0), 0) || 0
+      const failedAmount = failed?.reduce((acc: number, t: { amount: number }) => acc + (t.amount || 0), 0) || 0
       const total = succeededCount + failedCount
 
       setStats({

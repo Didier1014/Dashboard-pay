@@ -38,8 +38,8 @@ export function RecentTransactions() {
       .on(
         "postgres_changes",
         { event: "INSERT", schema: "public", table: "transactions" },
-        (payload) => {
-          setTransactions((prev) => [payload.new as Transaction, ...prev].slice(0, 5))
+        (payload: { new: Transaction }) => {
+          setTransactions((prev) => [payload.new, ...prev].slice(0, 5))
         },
       )
       .subscribe()

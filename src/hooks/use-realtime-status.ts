@@ -20,7 +20,7 @@ export function useRealtimeStatus() {
           setSalesToday((prev) => prev + 1)
         },
       )
-      .subscribe((status) => {
+      .subscribe((status: string) => {
         setIsConnected(status === "SUBSCRIBED")
       })
 

@@ -64,8 +64,10 @@ export default function TaxaConversaoPage() {
         .limit(30)
 
       if (campaigns) {
+        type CampaignRow = { date: string | null; campaign: string | null; visits: number; purchases: number }
+        const rows = campaigns as CampaignRow[]
         const campaignMap = new Map<string, { visits: number; purchases: number }>()
-        campaigns.forEach((c) => {
+        rows.forEach((c) => {
           const key = c.campaign || "Sem campanha"
           const curr = campaignMap.get(key) || { visits: 0, purchases: 0 }
           curr.visits += c.visits || 0
@@ -82,10 +84,10 @@ export default function TaxaConversaoPage() {
           })),
         )
 
-        const evo = campaigns
+        const evo = rows
           .filter((c) => c.date)
           .reduce<Record<string, { visits: number; purchases: number }>>((acc, c) => {
-            const key = c.date
+            const key = c.date!
             if (!acc[key]) acc[key] = { visits: 0, purchases: 0 }
             acc[key].visits += c.visits || 0
             acc[key].purchases += c.purchases || 0

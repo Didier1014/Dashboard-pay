@@ -31,11 +31,13 @@ export function FailurePieChart() {
         .neq("failure_reason", "")
 
       if (failures) {
-        const grouped = failures.reduce<Record<string, number>>((acc, curr) => {
+        type FailureRow = { failure_reason: string | null }
+        const rows = failures as FailureRow[]
+        const grouped: Record<string, number> = rows.reduce((acc, curr) => {
           const reason = curr.failure_reason || "Outro"
           acc[reason] = (acc[reason] || 0) + 1
           return acc
-        }, {})
+        }, {} as Record<string, number>)
 
         const total = Object.values(grouped).reduce((a, b) => a + b, 0)
         const reasons: FailureReason[] = Object.entries(grouped)
