@@ -49,6 +49,7 @@ export function LiveSalesChart() {
 
   useEffect(() => {
     const supabase = createClient()
+    if (!supabase) return
     const channel = supabase
       .channel("live-chart")
       .on(

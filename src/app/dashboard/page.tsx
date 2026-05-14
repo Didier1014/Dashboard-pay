@@ -71,6 +71,7 @@ export default function DashboardHome() {
     fetchKpis()
 
     const supabase = createClient()
+    if (!supabase) return
     const channel = supabase
       .channel("kpi-updates")
       .on(

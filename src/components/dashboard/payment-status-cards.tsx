@@ -59,6 +59,7 @@ export function PaymentStatusCards() {
     fetchStats()
 
     const supabase = createClient()
+    if (!supabase) return
     const channel = supabase
       .channel("payment-stats")
       .on(
