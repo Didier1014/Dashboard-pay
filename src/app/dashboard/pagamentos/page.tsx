@@ -27,6 +27,7 @@ export default function PagamentosPage() {
   useEffect(() => {
     const fetchData = async () => {
       const supabase = createClient()
+      if (!supabase) { setLoading(false); return }
 
       const { data: failed } = await supabase
         .from("transactions")

@@ -23,6 +23,7 @@ export function FailurePieChart() {
   useEffect(() => {
     const fetchFailures = async () => {
       const supabase = createClient()
+      if (!supabase) { setLoading(false); return }
       const { data: failures } = await supabase
         .from("transactions")
         .select("failure_reason")

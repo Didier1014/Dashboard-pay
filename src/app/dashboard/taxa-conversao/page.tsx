@@ -33,6 +33,7 @@ export default function TaxaConversaoPage() {
   useEffect(() => {
     const fetchData = async () => {
       const supabase = createClient()
+      if (!supabase) { setLoading(false); return }
 
       const { count: visits } = await supabase
         .from("click_funnel")

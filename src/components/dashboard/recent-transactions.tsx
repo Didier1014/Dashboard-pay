@@ -18,6 +18,7 @@ export function RecentTransactions() {
   useEffect(() => {
     const fetchRecent = async () => {
       const supabase = createClient()
+      if (!supabase) { setLoading(false); return }
       const { data } = await supabase
         .from("transactions")
         .select("*")
@@ -31,6 +32,7 @@ export function RecentTransactions() {
     fetchRecent()
 
     const supabase = createClient()
+    if (!supabase) return
     const channel = supabase
       .channel("recent-tx")
       .on(

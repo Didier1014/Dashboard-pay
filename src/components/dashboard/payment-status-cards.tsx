@@ -23,6 +23,7 @@ export function PaymentStatusCards() {
   useEffect(() => {
     const fetchStats = async () => {
       const supabase = createClient()
+      if (!supabase) { setLoading(false); return }
       const today = new Date()
       today.setHours(0, 0, 0, 0)
 

@@ -14,6 +14,7 @@ export function ConversionFunnel() {
   useEffect(() => {
     const fetchFunnel = async () => {
       const supabase = createClient()
+      if (!supabase) { setLoading(false); return }
       const stages = ["visitou", "iniciou_checkout", "checkout_abandonado", "comprou"] as const
       const result: ConversionFunnelType[] = []
 

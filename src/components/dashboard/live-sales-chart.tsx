@@ -25,6 +25,7 @@ export function LiveSalesChart() {
   useEffect(() => {
     const fetchData = async () => {
       const supabase = createClient()
+      if (!supabase) { setLoading(false); return }
       const now = new Date()
       const past = new Date(now.getTime() - 24 * 60 * 60 * 1000)
 

@@ -25,6 +25,10 @@ export function useRealtimeTransactions(
     async (currentOffset: number, append = false) => {
       setLoading(true)
       const supabase = createClient()
+      if (!supabase) {
+        setLoading(false)
+        return
+      }
 
       let query = supabase
         .from("transactions")
@@ -77,6 +81,7 @@ export function useRealtimeTransactions(
 
   useEffect(() => {
     const supabase = createClient()
+    if (!supabase) return
 
     const channel = supabase
       .channel("transactions-realtime")

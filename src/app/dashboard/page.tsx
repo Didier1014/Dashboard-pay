@@ -16,6 +16,7 @@ export default function DashboardHome() {
   useEffect(() => {
     const fetchKpis = async () => {
       const supabase = createClient()
+      if (!supabase) { setKpiLoading(false); return }
       const today = new Date()
       today.setHours(0, 0, 0, 0)
       const yesterday = new Date(today.getTime() - 86400000)

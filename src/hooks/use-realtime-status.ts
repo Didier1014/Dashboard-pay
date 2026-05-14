@@ -9,6 +9,7 @@ export function useRealtimeStatus() {
 
   useEffect(() => {
     const supabase = createClient()
+    if (!supabase) return
 
     const channel = supabase
       .channel("realtime-status")

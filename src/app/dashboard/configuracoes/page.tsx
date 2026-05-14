@@ -30,8 +30,9 @@ export default function ConfiguracoesPage() {
   }, [])
 
   const fetchConfigs = async () => {
-    try {
-      const res = await fetch("/api/config")
+      try {
+        const res = await fetch("/api/config")
+        if (!res.ok) throw new Error()
       const data = await res.json()
       setConfigs(data.configs || [])
     } catch {
